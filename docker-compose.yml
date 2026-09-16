@@ -1,0 +1,38 @@
+name: generador-qr
+
+services:
+  api:
+    build:
+      context: ./Codigo/api
+    volumes:
+      - ./Codigo/api:/app:ro
+    expose:
+      - "8000"
+    restart: unless-stopped
+    init: true
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=2)"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+
+  web:
+    build:
+      context: ./Codigo/web
+    ports:
+      - "${PUERTO_WEB:-80}:80"
+    volumes:
+      - ./Codigo/web/public:/usr/share/nginx/html:ro
+      - ./Codigo/web/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      api:
+        condition: service_healthy
+        restart: true
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O /dev/null http://127.0.0.1/ && wget -q -O /dev/null http://127.0.0.1/api/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 5s

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f6fa">
+  <meta name="description" content="Convierte texto en un código QR y descárgalo en PNG o SVG.">
+  <title>Generador QR · De texto a QR</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Generador QR, inicio"><span class="brand-icon" aria-hidden="true">▦</span> Generador<span class="brand-accent">QR</span></a>
+      <span class="header-note"><span class="status-dot"></span> Sin registros. Sin complicaciones.</span>
+    </header>
+
+    <main>
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">UNA IDEA. UN TEXTO. UN QR.</p>
+        <h1 id="page-title">Tu texto, listo para <span>escanear.</span></h1>
+        <p>Introduce tu texto y pulsa «Subir» para generar el código QR.<br>Lo verás en esta página y podrás descargarlo.</p>
+      </section>
+
+      <div class="workspace">
+        <section class="editor card" aria-labelledby="editor-title">
+          <div class="section-heading"><span class="step">01</span><h2 id="editor-title">Añade tu contenido</h2></div>
+          <form id="qr-form">
+            <label for="qr-text">Texto del código QR</label>
+            <p class="field-help" id="text-help">Un enlace, un mensaje, una idea… tú eliges.</p>
+            <textarea id="qr-text" name="text" rows="9" placeholder="Escribe o pega tu texto aquí…" aria-describedby="text-help counter capacity-note" required spellcheck="false"></textarea>
+            <div class="input-footer"><span id="counter">0 caracteres · 0 bytes UTF-8</span><button id="clear" type="button" class="text-button" disabled>Limpiar</button></div>
+            <div class="capacity-note" id="capacity-note"><span aria-hidden="true">ⓘ</span><p>El límite lo pone el QR. Hasta <strong>7089 dígitos</strong>, <strong>4296 caracteres alfanuméricos QR</strong> o <strong>2953 bytes ASCII</strong>. Los acentos y emojis ocupan más espacio.</p></div>
+            <button class="primary-button" id="generate" type="submit"><span id="generate-label">Subir</span><span aria-hidden="true">↗</span></button>
+            <p class="error" id="error" role="alert" hidden></p>
+          </form>
+          <p class="privacy"><span aria-hidden="true">◇</span> Tu texto se procesa en este servidor y no se guarda.</p>
+        </section>
+
+        <section class="preview card" aria-labelledby="preview-title" aria-busy="false" id="preview">
+          <div class="preview-header"><div class="section-heading"><span class="step">02</span><h2 id="preview-title">Tu código QR</h2></div><span class="badge" id="preview-badge">Vista previa</span></div>
+          <div class="qr-stage" id="qr-stage">
+            <div class="empty-preview" id="empty-preview"><div class="empty-icon" aria-hidden="true">▦</div><h3>Todo empieza con un texto</h3><p>Tu código aparecerá aquí<br>cuando pulses «Subir».</p></div>
+            <img id="qr-image" alt="Código QR generado con el texto introducido" hidden>
+          </div>
+          <p class="result-info" id="result-info" aria-live="polite">Listo para tu próxima idea.</p>
+          <div class="download-actions"><a class="download-button disabled" id="download-png" aria-disabled="true" download="codigo-qr.png" tabindex="-1"><span aria-hidden="true">↓</span> Descargar PNG</a><a class="download-button disabled" id="download-svg" aria-disabled="true" download="codigo-qr.svg" tabindex="-1"><span aria-hidden="true">↓</span> Descargar SVG</a></div>
+          <p class="download-hint">PNG para compartir · SVG para imprimir a cualquier tamaño</p>
+        </section>
+      </div>
+
+      <section class="features" aria-label="Cómo funciona">
+        <div><span class="feature-icon" aria-hidden="true">Aa</span><h3>Exactamente tu texto</h3><p>Conserva espacios, saltos de línea y emojis.</p></div>
+        <div><span class="feature-icon" aria-hidden="true">↗</span><h3>Comparte sin límites de tiempo</h3><p>El contenido queda dentro del QR y no caduca.</p></div>
+        <div><span class="feature-icon" aria-hidden="true">▧</span><h3>Del móvil al papel</h3><p>Dos formatos para que lo uses donde quieras.</p></div>
+      </section>
+    </main>
+    <footer><span>GeneradorQR</span><span>Pequeños cuadrados. Grandes posibilidades.</span></footer>
+  </div>
+</body>
+</html>
